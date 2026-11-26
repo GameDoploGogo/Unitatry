@@ -17,7 +17,7 @@ jobs:
           java-version: '17'
       - run: |
           pip install flet
-          yes | flet build apk
+          CI=true flet build apk
       - uses: actions/upload-artifact@v4
         with:
           name: Unitatry-APK

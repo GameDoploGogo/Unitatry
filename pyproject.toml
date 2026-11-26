@@ -1,0 +1,6 @@
+[project]
+name = "unitatry"
+version = "0.1.0"
+dependencies = [
+"flet",
+]

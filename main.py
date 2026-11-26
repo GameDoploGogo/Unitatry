@@ -19,7 +19,7 @@ class Unitatry(App):
         if self.s > 0 and self.e.text == str(self.a): self.ok += 1
         self.s += 1
         if self.s > 5: self.t.text = f"{self.ok}/5"; return
-        n1, n2 = random randint(1, 10), random.randint(1, 10)
+        n1, n2 = random.randint(1, 10), random.randint(1, 10)
         self.a, self.t.text, self.e.text = n1 + n2, f"{n1}+{n2}=?"
         
 Unitatry().run()

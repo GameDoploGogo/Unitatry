@@ -2,16 +2,27 @@ import flet as ft
 import random
 
 def main(page: ft.Page):
+    page.title = "Unitatry"
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+
     state = {"s": 0, "ok": 0, "ans": 0}
-    txt = ft.Text(size=40)
-    inp = ft.TextField(label="Ответ")
+    txt = ft.Text(size=40, weight=ft.FontWeight.BOLD)
+    inp = ft.TextField(
+        label="Ответ",
+        keyboard_type=ft.KeyboardType.NUMBER,
+        width=200,
+        text_align=ft.TextAlign.CENTER,
+    )
 
     def go(e):
-        if state["s"] > 0 and inp.value == str(state["ans"]):
+        if state["s"] > 0 and inp.value.strip() == str(state["ans"]):
             state["ok"] += 1
         state["s"] += 1
         if state["s"] > 5:
             txt.value = f"Итог: {state['ok']}/5"
+            inp.visible = False
+            btn.visible = False
             page.update()
             return
         a, b = random.randint(1, 10), random.randint(1, 10)
@@ -20,7 +31,10 @@ def main(page: ft.Page):
         inp.value = ""
         page.update()
 
-    page.add(txt, inp, ft.ElevatedButton("ОК", on_click=go))
+    inp.on_submit = go
+    btn = ft.Button(content="ОК", on_click=go)
+
+    page.add(txt, inp, btn)
     go(None)
 
 ft.run(main)
